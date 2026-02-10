@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GBZIN XIT ON</title>
+<style>
+:root{--neon:#00ffea;--red:#ff0033;--bg:#05060a}
+*{box-sizing:border-box;font-family:system-ui}
+body{margin:0;background:#05060a;color:#e8f8ff}
+.container{max-width:420px;margin:auto;padding:16px}
+.card{background:#0b1020;border-radius:16px;padding:16px;border:1px solid #0ff3}
+h1{text-align:center;text-shadow:0 0 15px #0ff}
+button,input{width:100%;padding:14px;border-radius:12px;border:none;margin-top:10px}
+button{background:linear-gradient(135deg,#00ffea,#5bffd8);font-weight:800}
+.hidden{display:none}
+#overlay{position:fixed;inset:0;background:#000c;display:none;
+align-items:center;justify-content:center;flex-direction:column}
+#overlay.active{display:flex;animation:flash .2s}
+@keyframes flash{0%{background:#fff}100%{background:#000c}}
+.ring{width:180px;height:180px;border:6px solid transparent;
+border-top:6px solid #0ff;border-right:6px solid #f03;
+border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bar{width:0;height:8px;background:#0ff;margin-top:20px}
+.fps{text-align:center;margin:10px;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card" id="login">
+    <h1>GBZIN XIT ON</h1>
+    <input id="key" placeholder="Digite a KEY">
+    <button onclick="login()">ENTRAR</button>
+  </div>
+
+  <div class="card hidden" id="menu">
+    <h1>MENU</h1>
+    <div class="fps">FPS: <span id="fps">60</span></div>
+    <button onclick="ativar()">ADICIONAR</button>
+  </div>
+</div>
+
+<div id="overlay">
+  <div class="ring"></div>
+  <div class="bar" id="bar"></div>
+</div>
+
+<script>
+const KEY="FULL4XCAPA";
+function login(){
+  if(key.value===KEY){
+    loginDiv.style.display="none";
+    menu.classList.remove("hidden");
+  }else alert("KEY inválida");
+}
+const loginDiv=document.getElementById("login");
+const menu=document.getElementById("menu");
+const overlay=document.getElementById("overlay");
+const bar=document.getElementById("bar");
+const fps=document.getElementById("fps");
+
+function ativar(){
+  overlay.classList.add("active");
+  let w=0,f=60;
+  const i=setInterval(()=>{
+    w+=5; f+=6;
+    bar.style.width=w+"%";
+    fps.textContent=f;
+    if(w>=100){
+      clearInterval(i);
+      overlay.classList.remove("active");
+      bar.style.width="0%";
+    }
+  },60);
+}
+</script>
+
+</body>
+</html>
